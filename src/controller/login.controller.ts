@@ -17,12 +17,12 @@ export const loginGoogleController = async (req: Request, res: Response) => {
     try {
       const newUser = new User(userDataByToken);
       const newUserSaved = await newUser.save();
-      return res.status(201).json({ user: newUserSaved });
+      return res.status(201).json({ error: false, user: newUserSaved, message: 'Usuario logeado correctamente' });
     } catch (error) {
       console.log(error);
-      return res.status(500).json({ message: 'Internal Server Error' });
+      return res.status(500).json({ error: true, user: null, message: 'Internal Server Error' });
     }
   }
 
-  return res.status(200).json({ user: existUser });
+  return res.status(200).json({ error: false, user: existUser, message: 'Usuario logeado correctamente' });
 };
